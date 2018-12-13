@@ -12,8 +12,7 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	public Cliente envia() {
-		Cliente cliente = new Cliente();
+	public Cliente envia(Cliente cliente) {
 		if(cliente.getRisco() == "B") {
 			cliente.setJuros(Cliente.RISCO_B);
 		}

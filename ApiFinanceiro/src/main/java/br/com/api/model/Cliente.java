@@ -11,8 +11,8 @@ import javax.persistence.Id;
 @Entity
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 2632545651202252926L;
-	public static double  RISCO_B = 0.10;
-	public static double  RISCO_C = 0.20;
+	public static double  RISCO_B = 10;
+	public static double  RISCO_C = 20;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,9 @@ public class Cliente implements Serializable{
 	
 	private String risco;
 	
-	private Double juros;
+	private BigDecimal creditos;
+	
+	private double juros;
 
 	public Long getId() {
 		return id;
@@ -41,11 +43,11 @@ public class Cliente implements Serializable{
 	}
 
 
-	public Double getJuros() {
+	public double getJuros() {
 		return juros;
 	}
 
-	public void setJuros(Double juros) {
+	public void setJuros(double juros) {
 		this.juros = juros;
 	}
 
@@ -55,6 +57,14 @@ public class Cliente implements Serializable{
 
 	public void setRisco(String risco) {
 		this.risco = risco;
+	}
+
+	public BigDecimal getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(BigDecimal creditos) {
+		this.creditos = creditos;
 	}
 	
 	

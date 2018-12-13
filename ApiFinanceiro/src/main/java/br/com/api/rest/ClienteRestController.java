@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,12 +32,27 @@ public class ClienteRestController {
 		return clienteRepository.findAll();
 	}
 	
-	@CrossOrigin
+/*	@CrossOrigin
 	@GetMapping(value = "/envia", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Cliente> enviarMensagem() {
-		Cliente cliente;
-		cliente = clienteService.envia();
+	public ResponseEntity<Cliente> enviarMensagem(@RequestBody Cliente cliente) {
+		cliente = clienteService.envia(cliente);
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+	}*/
+	
+	@CrossOrigin
+	@PostMapping(value = "/envia", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Cliente enviaDados(@RequestBody Cliente cliente) {
+		if(cliente.getRisco().equals("B")) {
+			cliente.setJuros(Cliente.RISCO_B);
+		}
+		
+		else if(cliente.getRisco().equals("C")) {
+			cliente.setJuros(Cliente.RISCO_C);
+		}
+		else {
+			cliente.setRisco("Sem Juros adicionais !");
+		}
+		return clienteRepository.save(cliente);
 	}
 	
 }
